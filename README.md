@@ -71,9 +71,7 @@ CORE --> UI
 │   └── guru_core.py                   # Lógica do agente
 │
 ├── 📁 assets/                        # Imagens e diagramas
-│   └── screenshot-chat.png           # Tela principal do Guru
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+    └── screenshot-chat.png           # Tela principal do Guru
+
 ```
 
