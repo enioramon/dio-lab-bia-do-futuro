@@ -50,6 +50,8 @@ CORE --> UI
 📁 lab-agente-financeiro/
 │
 ├── 📄 README.md
+├── 📄 requirements.txt
+├── 📄 .env
 │
 ├── 📁 data/                          # Dados mockados para o agente
 │   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
@@ -65,21 +67,13 @@ CORE --> UI
 │   └── 05-pitch.md                   # Roteiro do pitch
 │
 ├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
+│   ├── app.py                         # UI Streamlit
+│   └── guru_core.py                   # Lógica do agente
 │
 ├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
+│   └── screenshot-chat.png           # Tela principal do Guru
 │
 └── 📁 examples/                      # Referências e exemplos
     └── README.md
 ```
 
----
-
-## Dicas Finais
-
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
