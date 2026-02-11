@@ -1,110 +1,53 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# Guru — Agente Financeiro com IA Generativa
 
-## Contexto
+**Guru** é um assistente financeiro com IA focado em **planejamento de metas**, **explicação de produtos** e **simulações simples**, com respostas **contextualizadas** a partir de uma base local (CSV/JSON) e com **mecanismos anti-alucinação**.
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
-
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+> ⚠️ Conteúdo educacional. Não é recomendação financeira formal.
 
 ---
 
-## O Que Você Deve Entregar
+## ✨ Demo (Prints)
 
-### 1. Documentação do Agente
+> Coloque aqui imagens em `assets/` e atualize os links abaixo.
 
-Defina **o que** seu agente faz e **como** ele funciona:
+- Tela do chat (Guru em ação):  
+  `assets/screenshot-chat.png`
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+- Resumo do cliente (sidebar):  
+  `assets/screenshot-sidebar.png`
 
 ---
 
-### 2. Base de Conhecimento
+## 🚀 Principais funcionalidades
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
-
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+- ✅ Chat em linguagem natural (Streamlit)
+- ✅ Contexto do cliente via `perfil_investidor.json`
+- ✅ Recomendação de produtos compatível com perfil/risco (base local)
+- ✅ Simulações determinísticas (ex.: quanto falta para reserva / quanto guardar por mês)
+- ✅ Respostas seguras: se o dado não estiver na base, o Guru não inventa
 
 ---
 
-### 3. Prompts do Agente
+## 🧠 Como o Guru evita alucinações
 
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+- O Guru **só afirma fatos do cliente** se estiverem na base local (CSV/JSON).
+- Quando falta informação, responde: **“Não tenho essa informação na minha base.”**
+- Cálculos são feitos por funções determinísticas em Python (sem “chute” da IA).
+- Explicações de produtos se limitam ao catálogo `produtos_financeiros.json`.
 
 ---
 
-### 4. Aplicação Funcional
+## 🏗️ Arquitetura (alto nível)
 
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
+```mermaid
+flowchart LR
+U[Usuário] --> UI[Streamlit Chat UI]
+UI --> CORE[Guru Core]
+CORE --> DATA[Base local CSV/JSON]
+CORE --> CALC[Simulações/Cálculos]
+CALC --> CORE
+DATA --> CORE
+CORE --> UI
 
 ---
 
