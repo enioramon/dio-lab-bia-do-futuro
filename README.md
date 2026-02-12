@@ -1,7 +1,14 @@
 # 🤖 Guru — Assistente Financeiro com IA
 
 > Assistente financeiro inteligente com arquitetura determinística de segurança,  
-> combinando raciocínio com LLM, dados financeiros estruturados e mecanismos de prevenção de alucinações.
+> integrando LLM, dados financeiros estruturados e mecanismos de prevenção de alucinações  
+> para oferecer orientação clara, personalizada e segura.
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![OpenAI](https://img.shields.io/badge/OpenAI-LLM-black)
+![AI Safety](https://img.shields.io/badge/AI-Safety-green)
+![Finance](https://img.shields.io/badge/Domain-Financial-blueviolet)
 
 ---
 
