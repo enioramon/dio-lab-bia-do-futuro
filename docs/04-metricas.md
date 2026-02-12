@@ -29,6 +29,7 @@ Essa combinação permite avaliar tanto a **qualidade técnica da IA** quanto a 
 | **Coerência com o perfil** | Se recomendações respeitam risco e objetivo do cliente | Sugestão de produtos conservadores para reserva |
 | **Clareza** | Se a explicação é simples, objetiva e compreensível | Cálculo mensal apresentado de forma didática |
 | **Transparência** | Se limitações são declaradas e disclaimer é exibido | Inclusão do aviso educacional em todas as respostas |
+| **Controle de Alucinação** | Se a LLM respeita apenas o contexto enviado | Perguntar dado inexistente e verificar resposta segura |
 
 > Recomenda-se que **3 a 5 avaliadores** testem o Guru utilizando perguntas reais  
 > e atribuam notas de **1 a 5** para cada métrica.  
