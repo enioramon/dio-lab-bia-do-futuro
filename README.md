@@ -32,9 +32,6 @@ O resultado é uma experiência digital que permite ao usuário:
 Fluxo principal do sistema:
 
 ```mermaid
-## Arquitetura (alto nível)
-
-```mermaid
 flowchart TD
 
 A[Usuário]
@@ -44,6 +41,7 @@ A[Usuário]
 --> E[Base de Conhecimento<br/>JSON / CSV]
 --> F[Resposta segura ao usuário]
 ```
+
 
 ---
 
