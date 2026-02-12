@@ -31,6 +31,7 @@ O resultado é uma experiência digital que permite ao usuário:
 
 Fluxo principal do sistema:
 
+```mermaid
 flowchart TD
 
 A[Usuário] --> B[Interface Streamlit]
@@ -49,6 +50,7 @@ E --> E4[historico_atendimento.csv]
 D --> F[Resposta segura<br/>com anti-alucinação]
 
 F --> B
+```
 
 ---
 
