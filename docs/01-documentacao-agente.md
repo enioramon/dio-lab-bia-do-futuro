@@ -110,15 +110,6 @@ F --> B
 
 ### Componentes
 
-| Componente | Descrição |
-|------------|-----------|
-| **Interface** | Chat interativo desenvolvido em Streamlit |
-| **Motor do Agente** | Lógica em Python responsável por interpretar perguntas e gerar respostas |
-| **LLM (opcional)** | Pode ser integrado futuramente para linguagem natural avançada |
-| **Base de Conhecimento** | Arquivos locais JSON/CSV com perfil, transações, histórico e produtos |
-| **Módulo de Cálculo** | Funções determinísticas para metas, reservas e simulações |
-| **Validação** | Regras que impedem respostas fora da base (anti-alucinação) |
-
 
 | Componente                 | Descrição                                                                    |
 | -------------------------- | ---------------------------------------------------------------------------- |
@@ -136,9 +127,10 @@ F --> B
 ### Estratégias Adotadas
 
 - O Guru **só responde com base nos dados fornecidos** na base local.
-- Quando a informação não existe, responde explicitamente:
+- A LLM não decide números nem regras financeiras — apenas comunica resultados.
+- Cálculos são realizados por funções determinísticas em Python.
+- Quando a informação não existe, o agente responde explicitamente:
   > “Não tenho essa informação na minha base.”
-- Cálculos financeiros são feitos por **funções determinísticas em Python**, não por geração livre de texto.
 - Recomendações respeitam:
   - perfil de risco do cliente;
   - objetivo financeiro declarado.
@@ -156,6 +148,5 @@ O Guru **não**:
 - garante rentabilidade ou desempenho de investimentos;
 - substitui um consultor financeiro humano;
 - responde perguntas fora da base de conhecimento disponível;
-- realiza operações financeiras ou movimentações de conta.
+- executa operações financeiras ou movimentações de conta.
 
-Seu objetivo é **educação financeira assistida por IA**, com segurança e transparência.
