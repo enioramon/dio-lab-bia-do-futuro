@@ -3,37 +3,41 @@
 ## Caso de Uso
 
 ### Problema
-Muitos clientes possuem informações financeiras dispersas — como transações, metas, perfil de risco e produtos disponíveis — mas têm dificuldade em transformar esses dados em decisões simples do dia a dia, como:
+Muitos clientes possuem informações financeiras dispersas — como transações, metas, perfil de risco e produtos disponíveis — mas enfrentam dificuldade em transformar esses dados em decisões simples do dia a dia, como:
 
 - quanto falta para atingir uma reserva de emergência;
 - quanto guardar por mês para cumprir uma meta;
 - quais produtos financeiros são compatíveis com seu perfil;
-- como entender conceitos financeiros sem linguagem técnica.
+- como compreender conceitos financeiros sem linguagem técnica.
 
-Além disso, assistentes tradicionais costumam ser reativos e podem gerar respostas imprecisas quando não possuem dados suficientes.
+Além disso, assistentes financeiros tradicionais costumam ser **reativos** e podem gerar respostas **imprecisas ou genéricas** quando não possuem dados suficientes, reduzindo a confiança do usuário.
 
 ---
 
 ### Solução
-O **Guru** é um agente financeiro inteligente que:
+O **Guru** é um agente financeiro inteligente que combina:
 
-- entende perguntas em linguagem natural;
-- consulta uma base estruturada local (JSON/CSV) com dados do cliente;
-- realiza cálculos determinísticos para simulações financeiras simples;
-- recomenda produtos compatíveis com o perfil e objetivo do cliente;
-- evita alucinações, respondendo apenas com informações disponíveis na base.
+- **interpretação de linguagem natural via LLM (OpenAI)**;
+- **base de conhecimento estruturada local (JSON/CSV)**;
+- **cálculos determinísticos em Python** para simulações financeiras;
+- **recomendações compatíveis com perfil e objetivo do cliente**;
+- **mecanismos explícitos de segurança contra alucinações**.
 
-Dessa forma, o Guru transforma dados financeiros em **orientações claras, seguras e personalizadas**, atuando de forma consultiva e educativa.
+Nesse modelo, a LLM é utilizada apenas para **compreensão e comunicação**, enquanto:
+
+> **números, regras e decisões permanecem sob controle determinístico do código.**
+
+Assim, o Guru transforma dados financeiros em **orientações claras, seguras e personalizadas**, atuando de forma **consultiva, educativa e confiável**.
 
 ---
 
 ### Público-Alvo
-O agente é voltado para:
+O agente é direcionado a:
 
 - pessoas que desejam organizar a vida financeira;
-- clientes iniciantes ou intermediários em investimentos;
+- investidores iniciantes ou intermediários;
 - usuários que precisam de orientação simples para metas financeiras;
-- instituições financeiras que desejam oferecer atendimento digital consultivo.
+- instituições financeiras interessadas em **atendimento digital consultivo com IA segura**.
 
 ---
 
@@ -45,22 +49,22 @@ O agente é voltado para:
 ---
 
 ### Personalidade
-O Guru possui comportamento:
+O Guru apresenta comportamento:
 
 - **consultivo** — orienta sem impor decisões;
 - **educativo** — explica conceitos de forma simples;
-- **prudente** — evita promessas de rentabilidade ou risco excessivo;
-- **proativo** — sugere caminhos a partir do contexto do cliente.
+- **prudente** — evita promessas de rentabilidade;
+- **proativo** — sugere caminhos com base no contexto do cliente;
+- **seguro** — admite limitações quando a informação não está disponível.
 
 ---
 
 ### Tom de Comunicação
-O tom é:
 
-- **claro e acessível**, evitando jargões técnicos;
-- **profissional e confiável**, semelhante ao de bancos digitais;
-- **objetivo**, com respostas curtas e úteis;
-- **transparente**, deixando explícitas limitações de informação.
+- **claro e acessível**, sem jargões técnicos;
+- **profissional e confiável**, inspirado em bancos digitais;
+- **objetivo**, com respostas diretas e úteis;
+- **transparente**, explicitando limites de conhecimento.
 
 ---
 
@@ -114,6 +118,16 @@ F --> B
 | **Base de Conhecimento** | Arquivos locais JSON/CSV com perfil, transações, histórico e produtos |
 | **Módulo de Cálculo** | Funções determinísticas para metas, reservas e simulações |
 | **Validação** | Regras que impedem respostas fora da base (anti-alucinação) |
+
+
+| Componente                 | Descrição                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------- |
+| **Interface**              | Chat interativo desenvolvido em Streamlit                                    |
+| **LLM (OpenAI)**           | Responsável por compreender perguntas e gerar respostas em linguagem natural |
+| **Guru Core**              | Motor determinístico em Python com regras, cálculos e validações             |
+| **Base de Conhecimento**   | Arquivos locais JSON/CSV com perfil, transações, histórico e produtos        |
+| **Módulo de Cálculo**      | Funções determinísticas para metas, reservas e simulações                    |
+| **Validação de Segurança** | Regras anti-alucinação e controle de escopo de respostas                     |
 
 ---
 
