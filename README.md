@@ -32,24 +32,24 @@ O resultado é uma experiência digital que permite ao usuário:
 Fluxo principal do sistema:
 
 ```mermaid
-flowchart TD
+flowchart LR
 
-A[Usuário] --> B[Interface Streamlit]
+U[Usuário] --> UI[Interface Conversacional<br/>Streamlit]
 
-B --> C[LLM - OpenAI<br/>Interpretação e linguagem natural]
+UI --> LLM[LLM OpenAI<br/>Compreensão de Linguagem]
 
-C --> D[Guru Core<br/>Regras, cálculos e validações determinísticas]
+LLM --> CORE[Guru Core<br/>Motor Determinístico]
 
-D --> E[Base de Conhecimento]
+CORE --> DATA[(Base de Conhecimento)]
 
-E --> E1[perfil_investidor.json]
-E --> E2[produtos_financeiros.json]
-E --> E3[transacoes.csv]
-E --> E4[historico_atendimento.csv]
+DATA --> P1[Perfil do Investidor]
+DATA --> P2[Produtos Financeiros]
+DATA --> P3[Transações]
+DATA --> P4[Histórico de Atendimento]
 
-D --> F[Resposta segura<br/>com anti-alucinação]
+CORE --> SAFE[Validação e Segurança<br/>Anti-Alucinação]
 
-F --> B
+SAFE --> UI
 ```
 
 ---
