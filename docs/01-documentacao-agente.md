@@ -128,6 +128,7 @@ F --> B
 
 - O Guru **só responde com base nos dados fornecidos** na base local.
 - A LLM não decide números nem regras financeiras — apenas comunica resultados.
+- A LLM não tem acesso direto aos dados; recebe apenas contexto estruturado controlado pelo Guru Core.
 - Cálculos são realizados por funções determinísticas em Python.
 - Quando a informação não existe, o agente responde explicitamente:
   > “Não tenho essa informação na minha base.”
