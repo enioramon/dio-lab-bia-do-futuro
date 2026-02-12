@@ -161,3 +161,5 @@ Conteúdo educacional, não é recomendação financeira formal.
 - Few-shot prompting garante **consistência de tom e formato**.
 - Separar **decisão (código)** de **linguagem (LLM)** é uma prática
   comum em sistemas financeiros reais baseados em IA.
+- A LLM é utilizada apenas para linguagem natural,
+  enquanto cálculos e regras permanecem determinísticos no Guru Core.
