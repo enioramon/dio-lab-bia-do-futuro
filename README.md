@@ -1,3 +1,6 @@
+Python | Streamlit | OpenAI | LLM Safety | Financial AI
+
+
 # 🤖 Guru — Agente Financeiro Inteligente com IA
 
 > Assistente financeiro educacional que combina **IA generativa**,  
