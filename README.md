@@ -32,24 +32,17 @@ O resultado é uma experiência digital que permite ao usuário:
 Fluxo principal do sistema:
 
 ```mermaid
-flowchart LR
+## Arquitetura (alto nível)
 
-U[Usuário] --> UI[Interface Conversacional<br/>Streamlit]
+```mermaid
+flowchart TD
 
-UI --> LLM[LLM OpenAI<br/>Compreensão de Linguagem]
-
-LLM --> CORE[Guru Core<br/>Motor Determinístico]
-
-CORE --> DATA[(Base de Conhecimento)]
-
-DATA --> P1[Perfil do Investidor]
-DATA --> P2[Produtos Financeiros]
-DATA --> P3[Transações]
-DATA --> P4[Histórico de Atendimento]
-
-CORE --> SAFE[Validação e Segurança<br/>Anti-Alucinação]
-
-SAFE --> UI
+A[Usuário]
+--> B[Interface Streamlit]
+--> C[LLM<br/>Interpretação de linguagem natural]
+--> D[Guru Core<br/>Regras, cálculos e validações]
+--> E[Base de Conhecimento<br/>JSON / CSV]
+--> F[Resposta segura ao usuário]
 ```
 
 ---
