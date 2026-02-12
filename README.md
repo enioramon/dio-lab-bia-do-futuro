@@ -146,6 +146,22 @@ O **Guru** foi projetado com foco em:
 
 ---
 
+## Demonstração
+
+### Interface do Guru
+![Interface](assets/screenshot-chat.png)
+
+### Cálculo da reserva de emergência
+![Reserva](assets/screenshot-reserva.png)
+
+### Simulação de aporte mensal
+![Aporte](assets/screenshot-aporte.png)
+
+### Resposta segura sem alucinação
+![Segurança](assets/screenshot-seguranca.png)
+
+---
+
 ## Evoluções Futuras
 
 - Análise automática de gastos por categoria (a partir de `transacoes.csv`)
