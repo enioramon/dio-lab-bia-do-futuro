@@ -1,114 +1,155 @@
 # Base de Conhecimento — Guru
 
+## Visão Geral
+
+O **Guru** utiliza uma base de conhecimento local composta por arquivos estruturados em **CSV** e **JSON**, armazenados na pasta `data/`.
+
+Esses dados permitem:
+
+- personalização das respostas ao usuário;
+- execução de **cálculos financeiros determinísticos**;
+- coerência com o perfil, metas e produtos disponíveis;
+- integração segura com **IA generativa**, evitando alucinações.
+
+A arquitetura segue o princípio:
+
+> **dados e cálculos são determinísticos;  
+> a LLM apenas interpreta e comunica.**
+
+---
+
 ## Dados Utilizados
-
-O Guru utiliza uma base de conhecimento local composta por arquivos estruturados em **CSV** e **JSON**, localizados na pasta `data/`.
-
-Esses dados permitem personalizar respostas, realizar simulações financeiras e manter coerência com o perfil do cliente.
 
 | Arquivo | Formato | Utilização no Agente |
 |---------|---------|----------------------|
-| `historico_atendimento.csv` | CSV | Recuperar contexto de interações anteriores e temas já discutidos |
-| `perfil_investidor.json` | JSON | Identificar perfil de risco, objetivos, renda, patrimônio e metas financeiras |
-| `produtos_financeiros.json` | JSON | Disponibilizar catálogo de produtos compatíveis com perfil e objetivo |
-| `transacoes.csv` | CSV | Possibilitar análise de gastos e comportamento financeiro do cliente |
+| `historico_atendimento.csv` | CSV | Contextualização de interações anteriores e possibilidade de memória futura |
+| `perfil_investidor.json` | JSON | Perfil de risco, renda, patrimônio, objetivos e metas financeiras |
+| `produtos_financeiros.json` | JSON | Catálogo de produtos com risco, finalidade e características |
+| `transacoes.csv` | CSV | Base para análises futuras de comportamento financeiro e gastos |
 
 ---
 
 ## Adaptações nos Dados
 
-Os dados mockados fornecidos pelo desafio foram **mantidos em sua estrutura original**, com pequenas adequações voltadas à simulação do comportamento do agente:
+Os dados mockados fornecidos pelo desafio foram **preservados em sua essência**, com pequenas adequações técnicas:
 
-- organização dos arquivos na pasta `data/` para carregamento centralizado;
-- padronização de nomes de campos para facilitar leitura pelo código Python;
-- utilização das metas financeiras do perfil do cliente para cálculos determinísticos (ex.: reserva de emergência);
-- definição de produtos com **níveis de risco e finalidade**, permitindo filtragem automática conforme perfil do investidor.
+- organização centralizada na pasta `data/`;
+- padronização de nomes de campos para leitura consistente em Python;
+- utilização das **metas financeiras** do perfil para cálculos determinísticos (ex.: reserva de emergência);
+- definição explícita de **nível de risco** e **finalidade dos produtos**, permitindo filtragem automática conforme perfil do investidor.
 
-Não houve inclusão de dados reais ou sensíveis, mantendo o projeto dentro do escopo educacional do desafio.
+Não foram incluídos **dados reais ou sensíveis**, mantendo o projeto dentro do escopo educacional e seguro.
 
 ---
 
 ## Estratégia de Integração
 
-### Como os dados são carregados?
+### Carregamento dos Dados
 
-Os arquivos **JSON** e **CSV** são carregados no início da execução do aplicativo Streamlit, utilizando funções auxiliares em Python.
+Os arquivos JSON e CSV são carregados:
 
-Esse carregamento ocorre:
-
-1. na inicialização da sessão do usuário;
+1. na inicialização do aplicativo Streamlit;
 2. antes da renderização da interface;
-3. garantindo que todas as respostas utilizem a mesma base de contexto.
+3. uma única vez por sessão do usuário.
 
-Essa abordagem permite:
+Isso garante:
 
 - consistência nas respostas;
 - baixo custo computacional;
-- simplicidade de implementação para ambiente educacional.
+- simplicidade arquitetural adequada ao contexto educacional.
 
 ---
 
-### Como os dados são usados no agente?
+### Uso dos Dados pelo Agente
 
-O Guru utiliza os dados de forma **determinística e contextual**:
+O Guru utiliza os dados de forma **determinística e auditável**:
 
-- **Perfil do investidor**  
-  Usado para:
-  - personalizar recomendações;
-  - validar compatibilidade de risco;
-  - identificar metas e prazos.
+#### Perfil do investidor
+Usado para:
 
-- **Produtos financeiros**  
-  Utilizados para:
-  - explicar características de cada produto;
-  - sugerir opções alinhadas ao perfil e objetivo.
+- personalizar respostas;
+- validar compatibilidade de risco;
+- identificar metas, prazos e objetivos financeiros;
+- responder consultas diretas (renda, patrimônio, perfil).
 
-- **Transações e histórico de atendimento**  
-  Atualmente disponíveis para:
-  - contextualização futura;
-  - expansão para análises de gastos e comportamento financeiro.
+#### Produtos financeiros
+Utilizados para:
 
-Os dados **não são inseridos diretamente em prompts generativos**.  
-Em vez disso, são consultados por funções Python, evitando alucinações e garantindo precisão.
+- explicar características de cada produto;
+- sugerir opções compatíveis com risco e objetivo;
+- impedir recomendações fora do catálogo local.
+
+#### Transações e histórico
+Atualmente disponíveis para:
+
+- contextualização futura;
+- expansão para análises de gastos e comportamento financeiro.
 
 ---
 
-## Exemplo de Contexto Utilizado pelo Guru
+## Integração com IA Generativa
 
-A seguir, um exemplo simplificado de como as informações são organizadas internamente para responder ao usuário:
+Diferentemente de chatbots tradicionais:
 
-Dados do Cliente
-- Nome: João Silva
-- Idade: 32 anos
-- Perfil de investidor: Moderado
-- Renda mensal: R$ 5.000
-- Reserva atual: R$ 10.000
+- os dados **não são inseridos diretamente em prompts livres**;
+- o **Guru Core** consulta a base local e produz:
+  - fatos;
+  - cálculos;
+  - listas de produtos válidos.
 
-Meta principal
-- Completar reserva de emergência
-- Valor necessário: R$ 15.000
-- Prazo: 2026-06
+Somente depois disso a **LLM** é utilizada para:
 
-Produtos compatíveis
-- Tesouro Selic — baixo risco, indicado para reserva
-- CDB com liquidez diária — baixo risco, uso conservador
+- interpretar perguntas em linguagem natural;
+- redigir respostas claras e profissionais.
 
-Esse contexto permite que o Guru:
+Esse modelo reduz significativamente o risco de:
 
-- calcule quanto falta para a meta;
-- estime quanto guardar por mês;
-- sugira produtos adequados com segurança.
+- alucinação de dados financeiros;
+- inconsistência de números;
+- recomendações fora do escopo.
+
+---
+
+## Exemplo de Contexto Interno
+
+Exemplo simplificado de informações utilizadas pelo agente:
+
+### Dados do cliente
+
+- Nome: João Silva  
+- Idade: 32 anos  
+- Perfil de investidor: Moderado  
+- Renda mensal: R$ 5.000  
+- Reserva atual: R$ 10.000  
+
+### Meta principal
+
+- Completar reserva de emergência  
+- Valor necessário: R$ 15.000  
+- Prazo: 2026-06  
+
+### Produtos compatíveis
+
+- Tesouro Selic — baixo risco, indicado para reserva  
+- CDB com liquidez diária — baixo risco, uso conservador  
+
+Com base nesse contexto, o Guru pode:
+
+- calcular o valor faltante para a meta;
+- estimar o aporte mensal necessário;
+- sugerir produtos adequados com segurança.
 
 ---
 
 ## Considerações de Segurança
 
-A base de conhecimento do Guru segue princípios de **privacidade e confiabilidade**:
+A base de conhecimento segue princípios de **privacidade, auditabilidade e confiabilidade**:
 
-- utiliza apenas **dados fictícios (mock)**;
+- utiliza exclusivamente **dados fictícios (mock)**;
 - não acessa sistemas bancários reais;
 - não armazena informações sensíveis;
-- permite auditoria completa das respostas, pois todos os dados são locais.
+- permite rastreabilidade completa das respostas, pois todos os dados são locais.
 
-Essa abordagem reforça o caráter **educacional, seguro e transparente** do agente.
+Essa abordagem reforça o caráter:
 
+> **educacional, seguro e transparente** do Guru.
